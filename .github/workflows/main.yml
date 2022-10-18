@@ -16,9 +16,10 @@ jobs:
       - name: Run python code and generate html file
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USER_LIST: arthurbdiniz, adenot, alandavid, antonioftamura, brunodasilvalenga, claisonamorim, DaisyMonte, doug1988, FabioORamos, felipesqf, helderklemp, jeremiasroma, jrpradojr, luiz-dnx, lzrocha, maiconrocha, mcosta1105, mvsnogueira-dnx, pietromarmelo, RaphaelMacedonio, Renatovnctavares, s-alexsilva, wvxavier, caiovfernandes
           PAGE_DATA_COUNT: 5
         run: |
+          pip3 install PyGithub
+          export USER_LIST=$(python3 github_get_members.py)
           export DURATION_IN_DAYS=$(date -d "$D" '+%d')
           docker build --target main -t leaderboard .
           docker run -e GITHUB_TOKEN -e USER_LIST -e DURATION_IN_DAYS -e PAGE_DATA_COUNT -v $(pwd):/app leaderboard
