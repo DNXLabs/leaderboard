@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run python code and generate html file
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
           PAGE_DATA_COUNT: 5
         run: |
           pip3 install PyGithub
